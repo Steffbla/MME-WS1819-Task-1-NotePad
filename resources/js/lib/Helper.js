@@ -1,8 +1,6 @@
 /* eslint-env browser */
 
-var NotePad = NotePad || {};
-
-NotePad.Helper = (function() {
+var DOMHelper = DOMHelper || (function() {
   "use strict";
 
   var that = {};

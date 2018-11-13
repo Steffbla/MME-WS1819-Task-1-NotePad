@@ -2,13 +2,17 @@
 
 var NotePad = NotePad || {};
 
-NotePad.Note = function(id, title, text) {
+NotePad.Note = function(id, title, text, update) {
   "use strict";
 
   this.id = id;
   this.title = title;
   this.text = text;
-  this.update = Date.now();
+  if (update) {
+    this.update = update;
+  } else {
+    this.update = Date.now();
+  }
 };
 
 NotePad.Note.prototype.setTitle = function(title) {

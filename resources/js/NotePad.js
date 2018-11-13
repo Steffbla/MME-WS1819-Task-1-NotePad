@@ -15,6 +15,7 @@ NotePad.App = (function() {
     initBoard();
     initEditor();
     initAddButton();
+    notes.restore();
   }
 
   function initNoteStorage() {
@@ -25,13 +26,13 @@ NotePad.App = (function() {
 
   function initBoard() {
     let boardEl = document.querySelector("#board");
-    board = NotePad.BoardView(boardEl);
+    board = NotePad.BoardView().init(boardEl);
     board.addEventListener("noteClicked", onNoteClickedInBoard);
   }
 
   function initEditor() {
     let editorEl = document.querySelector("#editor");
-    editor = NotePad.EditView(editorEl);
+    editor = NotePad.EditView().init(editorEl);
     editor.addEventListener("noteChanged", onNoteChanged);
   }
 
@@ -40,23 +41,20 @@ NotePad.App = (function() {
     button.addEventListener("click", onAddNoteButtonClicked);
   }
 
+  function onAddNoteButtonClicked() {
+    notes.create("Title", "Text");
+  }
+
   function onNoteCreated(event) {
     let note = event.note;
     board.add(note);
   }
 
-  function onNoteUpdated(event) {
-    let note = event.note;
-    board.update(note);
-    editor.hide();
-  }
-
-  function onAddNoteButtonClicked() {
-    notes.create("Title", "Text");
-  }
-
   function onNoteClickedInBoard(event) {
     let note = notes.get(event.noteID);
+    if (!note) {
+      return;
+    }
     editor.setNote(note);
     editor.show();
   }
@@ -64,6 +62,12 @@ NotePad.App = (function() {
   function onNoteChanged(event) {
     let note = event.note;
     notes.update(note);
+  }
+
+  function onNoteUpdated(event) {
+    let note = event.note;
+    board.update(note);
+    editor.hide();
   }
 
   that.init = init;

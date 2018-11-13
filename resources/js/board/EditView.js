@@ -2,23 +2,32 @@
 
 var NotePad = NotePad || {};
 
-NotePad.EditView = function(el) {
+NotePad.EditView = function() {
   "use strict";
-  var that = new EventTarget(),
-    titleEl = el.querySelector("[name='title']"),
-    textEl = el.querySelector("[name='text'"),
-    idEl = el.querySelector("[name='id'");
 
-  el.querySelector("[name='save']").addEventListener("click",
-    onSaveButtonClicked);
-  el.querySelector("[name='cancel']").addEventListener("click",
-    onCancelButtonClicked);
+  var that = new EventTarget(),
+    editorEl,
+    titleEl,
+    textEl,
+    idEl;
+
+  function init(el) {
+    editorEl = el;
+    titleEl = el.querySelector("[name='title']");
+    textEl = el.querySelector("[name='text'");
+    idEl = el.querySelector("[name='id'");
+    el.querySelector("[name='save']").addEventListener("click",
+      onSaveButtonClicked);
+    el.querySelector("[name='cancel']").addEventListener("click",
+      onCancelButtonClicked);
+    return that;
+  }
 
   function setVisibility(shouldBeVisible) {
     if (shouldBeVisible) {
-      el.classList.remove("hidden");
+      editorEl.classList.remove("hidden");
     } else {
-      el.classList.add("hidden");
+      editorEl.classList.add("hidden");
     }
   }
 
@@ -42,6 +51,7 @@ NotePad.EditView = function(el) {
     that.dispatchEvent(event);
   }
 
+  that.init = init;
   that.show = setVisibility.bind(this, true);
   that.hide = setVisibility.bind(this, false);
   that.setNote = setNote;

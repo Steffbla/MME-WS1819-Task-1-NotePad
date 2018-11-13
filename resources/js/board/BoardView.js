@@ -2,25 +2,32 @@
 
 var NotePad = NotePad || {};
 
-NotePad.BoardView = function(el) {
+NotePad.BoardView = function() {
   "use strict";
+
   var that = new EventTarget(),
-    noteViews = [];
+    boardEl,
+    noteEls = [];
+
+  function init(el) {
+    boardEl = el;
+    return that;
+  }
 
   function addNote(note) {
     let view = new NotePad.NoteView(note);
     view.setClickListener(onNoteClicked);
-    noteViews.push(view);
-    el.appendChild(view.el);
+    noteEls.push(view);
+    boardEl.appendChild(view.el);
   }
 
   function updateNote(note) {
-    let view = getView(note.id);
+    let view = findViewByID(note.id);
     view.update(note);
   }
 
-  function getView(id) {
-    let foundView = noteViews.find(function(view) {
+  function findViewByID(id) {
+    let foundView = noteEls.find(function(view) {
       return view.getID() === id;
     });
     if (foundView) {
@@ -35,6 +42,7 @@ NotePad.BoardView = function(el) {
     that.dispatchEvent(event);
   }
 
+  that.init = init;
   that.add = addNote;
   that.update = updateNote;
   return that;
