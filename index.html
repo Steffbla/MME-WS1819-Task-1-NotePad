@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotePad</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Notepad</h1>
+    </header>
+    <div id="add-note-button">&#65291;</div>
+    <div id="content">
+        <ul id="board">
+        </ul>
+        <div id="editor" class="hidden">
+            <div id="form">
+                <input type="text" name="id" disabled>
+                <input type="text" name="title" placeholder="Title">
+                <textarea name="text" placeholder="Note"></textarea>
+            </div>
+            <div id="buttons">
+                <input type="button" name="save" value="Save">
+                <input type="button" name="cancel" value="Cancel">
+            </div>
+        </div>
+    </div>
+</body>
+<template id="note-view-template">
+    <li class="note" data-id="{{id}}">
+        <span class="title"></span>
+        <span class="text"></span>
+        <span class="update"></span>
+    </li>
+</template>
+<script type="application/javascript" src="resources/js/lib/Helper.js" defer></script>
+<script type="application/javascript" src="resources/js/notes/Note.js" defer></script>
+<script type="application/javascript" src="resources/js/notes/NoteView.js" defer></script>
+<script type="application/javascript" src="resources/js/notes/NoteStorage.js" defer></script>
+<script type="application/javascript" src="resources/js/board/BoardView.js" defer></script>
+<script type="application/javascript" src="resources/js/board/EditView.js" defer></script>
+<script type="application/javascript" src="resources/js/NotePad.js" defer></script>
+
+</html>
