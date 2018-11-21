@@ -1,7 +1,21 @@
 /* eslint-env browser */
 
+// namespace object for this app
 var NotePad = NotePad || {};
 
+/**
+ * NotePad.NoteStorage
+ *
+ * Model module for the NotePad-App
+ * 
+ * The note storage is used to create, save and modify all notes. For this purpose, the module provides a public interface to create new, update and retrieve existing notes.  
+ * The storage is the app's only component able to modify an exsiting note. Through public events and methods only copies of the stored notes are send outwards. All notes are
+ * stored in the local storage from wich they are restored at the start.
+ *
+ * Events:
+ *   noteCreated: Fired when a new note was created | Event contains a copy of the newly created note
+ *   noteUpdated: Fired when a existing note was updated | Event contains a copy of the updated note
+ */
 NotePad.NoteStorage = function() {
   "use strict";
 
@@ -39,6 +53,7 @@ NotePad.NoteStorage = function() {
     notes.push(note);
     event.note = note.copy();
     that.dispatchEvent(event);
+    // New notes are currently saved only after first update
   }
 
   function updateNote(note) {
@@ -67,6 +82,7 @@ NotePad.NoteStorage = function() {
   }
 
   function getRandomID() {
+    // a simple solution for providing a unique ID given that we won't delete any notes
     return notes.length + 1;
   }
 

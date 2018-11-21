@@ -1,13 +1,24 @@
 /* eslint-env browser */
 
+// namespace object for this app
 var NotePad = NotePad || {};
 
+/**
+ * NotePad.App
+ *
+ * Presenter module for the NotePad-App
+ * 
+ * This module is used to initialize and control all other modules. 
+ */
 NotePad.App = (function() {
   "use strict";
 
   var that = {},
+    // the note storage
     notes,
+    // the board view
     board,
+    // the editor view
     editor;
 
   function init() {
@@ -52,6 +63,7 @@ NotePad.App = (function() {
 
   function onNoteClickedInBoard(event) {
     let note = notes.get(event.noteID);
+    // do nothing if no matching note was found for the given ID
     if (!note) {
       return;
     }
@@ -74,4 +86,5 @@ NotePad.App = (function() {
   return that;
 }());
 
+// call init and start the app
 NotePad.App.init();

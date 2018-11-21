@@ -1,7 +1,18 @@
 /* eslint-env browser */
 
+// namespace object for this app
 var NotePad = NotePad || {};
 
+/**
+ * NotePad.EditView
+ *
+ * View module for the NotePad-App
+ * 
+ * This view is used to render and control the editor. It provides public methods to show and hide the editor and to display a note's title and text in the editor's input elments.
+ *
+ * Events: 
+ *   noteChanged: Fired when the user clicks on the 'save'-Button while the editor is visible | Event contains the id of the currently displayed note and it's possibly modified title and text
+ */
 NotePad.EditView = function() {
   "use strict";
 
