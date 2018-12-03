@@ -16,8 +16,7 @@ NotePad.NoteView = (function() {
   "use strict";
 
   // template string to build a new view
-  const NOTE_VIEW_TEMPLAT = document.querySelector(
-    "#note-view-template").innerHTML.trim();
+  const NOTE_VIEW_TEMPLATE = document.querySelector("#note-view-template").innerHTML.trim();
 
   // shared (private) method to create a new element, binding the content of an object (data) to a template (template)
   function createElement(template, data) {

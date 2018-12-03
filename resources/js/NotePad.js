@@ -26,6 +26,7 @@ NotePad.App = (function() {
     initBoard();
     initEditor();
     initAddButton();
+    // restore saved notes from previous session
     notes.restore();
   }
 
@@ -86,5 +87,5 @@ NotePad.App = (function() {
   return that;
 }());
 
-// call init and start the app
+// call init to start the app
 NotePad.App.init();
